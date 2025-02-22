@@ -13,12 +13,26 @@ def index():
 
 @app.route('/home', methods=["GET", "POST"])
 def ratio():
-    search = AO3.Search(tags="Caitlyn*s*Vi%20(League%20of%20Legends)", sort_column=">kudos", sort_direction='desc')
+    search = AO3.Search(tags="Caitlyn*s*Vi%20(League%20of%20Legends)", kudos=AO3.utils.Constraint(10000))
     search.update()
-    kudos_heap = []
-    print(search.results)
-    #for i in range(search.pages):
-    #for i in range(10):
+    
+    #print statements
+    print(search.pages)
+
+    for result in search.results:
+        metadata = result.metadata
+        print(result,  metadata["kudos"])
+    #print statements
+
+    '''
+    url = "https://archiveofourown.org/works/35418925/chapters/88285813"
+    workid = AO3.utils.workid_from_url(url)
+    print(f"Work ID: {workid}")
+    work = AO3.Work(workid)
+    print(f"Chapters: {work.nchapters}")
+    '''
+    
+    '''
     counter = 0
     for result in search.results:
         if counter == 20:
@@ -32,10 +46,11 @@ def ratio():
             counter += 1
         #search.page += 1
         #search.update()
+    '''
     print("HIIIIIIIIIII==============")
-    print(len(kudos_heap))
+    #print(len(kudos_heap))
     ratio_heap = [] 
-    for kudos, hits, work in kudos_heap:
+    for work in search.results:
         metadata = work.metadata
         keys = metadata.keys() 
         if "bookmarks" in keys and "kudos" in keys and "hits" in keys:
@@ -44,19 +59,10 @@ def ratio():
                 bookmarks_to_kudos = 1
             #print(bookmarks_to_kudos)
             heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"],work))
-   
-    '''
-    ratio_heap = []    
-    for result in search.results:
-        metadata = result.metadata
-        keys = metadata.keys() 
-        if "bookmarks" in keys and "kudos" in keys:
-            bookmarks_to_kudos = metadata["bookmarks"] / metadata["kudos"]
-            heapq.heappush(ratio_heap, (-1 * bookmarks_to_kudos, result))
-    '''
     
     items = []
-    for bookmarks_to_kudos, hits, work in ratio_heap:
+    for _ in range(min(50, len(ratio_heap))):
+        bookmarks_to_kudos, hits, work = heapq.heappop(ratio_heap)
         title = work.metadata['title']
         author = ",".join(work.metadata['authors'])
         bookmarks_to_kudos = "bookmarks to kudos ratio: " + str(bookmarks_to_kudos * -1)
