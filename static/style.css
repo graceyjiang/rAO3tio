@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Lucida Grande';
+    src: url("./fonts/Lucida-Grande-Regular-Font.ttf");
+}
+
+body { /* paper and red border */
+    background-image: url("./img/paper.jpg");
+    background-position: center;
+    background-size: 100vw 100vh;
+}
+
+h1 {
+    font-family: 'Lucida Grande';
+    line-height: 14px;
+}
+
+h2 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 14px;
+}
+
+#frontpage1 {
+    font-size: 128px;
+    letter-spacing: -0.17em;
+}
+
+#frontpage2 {
+    font-size: 42px;
+}
+
+.container {
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+    min-height: 100vh;
+    flex-direction: column /* stacks h1 and h2 on top of each other */
+}
