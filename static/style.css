@@ -2,6 +2,10 @@
     font-family: 'Lucida Grande';
     src: url("./fonts/Lucida-Grande-Regular-Font.ttf");
 }
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url("./fonts/arialroundedmtbold.ttf");
+}
 
 body { /* paper and red border */
     background-image: url("./img/paper.jpg");
@@ -20,6 +24,39 @@ h2 {
     font-style: normal;
     line-height: 14px;
 }
+
+button{ 
+    font-family:'Arial Rounded MT Bold';
+    font-size: 32px;
+    border-radius: 20px;
+    color: #891C1C;
+    background: #ffffff;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+    padding: 6px 30px;
+    border: 2px solid black;
+}
+
+/*
+button:hover::after{  
+    content: '';
+    background: #891C1C;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+*/
+
+button:hover{ 
+    color: white;
+    background: #891C1C;
+}
+
 
 #frontpage1 {
     font-size: 128px;
