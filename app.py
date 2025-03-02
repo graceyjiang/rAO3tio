@@ -9,9 +9,13 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
-@app.route('/home', methods=["GET", "POST"])
+@app.route('/search', methods=["GET", "POST"])
+def search():
+    return render_template('search.html')
+
+@app.route('/results', methods=["GET", "POST"])
 def ratio():
     search = AO3.Search(tags="Caitlyn*s*Vi%20(League%20of%20Legends)", kudos=AO3.utils.Constraint(10000))
     search.update()
@@ -71,7 +75,7 @@ def ratio():
         hits = ", hits: " + str(hits)
         items.append(title + " - " + author + ", " + bookmarks_to_kudos + bookmarks + kudos + hits)
     
-    return render_template('home.html', items=items)
+    return render_template('results.html', items=items)
     
 
 if __name__ == '__main__':
