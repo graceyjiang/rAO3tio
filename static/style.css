@@ -116,3 +116,12 @@ button:hover{
     color: white;
     background: #891C1C;
 }
+
+.dark-mode {
+    background: black;
+    color: white;
+}
+
+#toggleDarkMode { /* makes it so dark mode toggle button is slightly longer width wise */
+    width: 300px;
+}
