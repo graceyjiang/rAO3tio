@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "Lucida Grande";
+  src: url("./assets/Lucida-Grande-Regular-Font.ttf");
+}
+@font-face {
+  font-family: "Arial Rounded MT Bold";
+  src: url("./assets/arialroundedmtbold.ttf");
+}
+
+h1 {
+  font-family: "Lucida Grande";
+  line-height: 14px;
+}
+
+h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 14px;
+}
+
+button {
+  font-family: "Arial Rounded MT Bold";
+  font-size: 40px;
+  height: 72px;
+  width: 200px;
+  border-radius: 15px;
+  color: #891c1c;
+  background: #ffffff;
+  cursor: pointer;
+  border: 2px solid black;
+  text-wrap: nowrap;
+}
+
+button:hover {
+  color: white;
+  background: #891c1c;
+}
+
+#frontpage1 {
+  font-size: 128px;
+  letter-spacing: -0.17em;
+}
+
+#frontpage2 {
+  font-size: 42px;
+}
+
+#whattag {
+  vertical-align: middle;
+  font-size: 64px;
+  padding-right: 50px;
+}
+
+.container {
+  display: flex;
+  gap: 10px;
+  align-items: center; /* Vertical center alignment */
+  justify-content: center; /* Horizontal center alignment */
+  min-height: 100vh;
+  flex-direction: column; /* stacks h1 and h2 on top of each other */
+}
+
+.container2 {
+  display: flex;
+  align-items: center; /* Vertical center alignment */
+  justify-content: center; /* Horizontal center alignment */
+  min-height: 100vh;
+}
+
+#tagbox input {
+  outline: none;
+  border: 1px solid black;
+  border-radius: 15px;
+  height: 68px;
+  width: 613;
+  vertical-align: middle;
+}
+
+#tagbox input:focus {
+  border: 2px solid #891c1c;
+}
+
+#tag {
+  font-family: "Lucida Grande";
+  font-size: 40px;
+  padding-left: 25px;
+  line-height: 2;
+}
+
+#next {
+  font-family: "Arial Rounded MT Bold";
+  font-size: 40px;
+  height: 72px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 15px;
+  color: #891c1c;
+  cursor: pointer;
+  vertical-align: middle;
+  background-color: #ffffff;
+}
+
+#next:hover {
+  color: white;
+  background: #891c1c;
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+}
+
+#toggleDarkMode {
+  /* makes it so dark mode toggle button is slightly longer width wise */
+  width: 300px;
+}
