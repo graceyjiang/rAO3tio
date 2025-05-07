@@ -7,6 +7,13 @@
   src: url("./assets/arialroundedmtbold.ttf");
 }
 
+body {
+  /* paper and red border */
+  background-image: url("./assets/paper.jpg");
+  background-position: center;
+  background-size: 100vw 100vh;
+}
+
 h1 {
   font-family: "Lucida Grande";
   line-height: 14px;

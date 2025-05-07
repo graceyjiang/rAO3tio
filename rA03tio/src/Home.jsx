@@ -5,10 +5,8 @@ import "./Style.css";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
-
   const goToSearch = () => {
-    navigate("/search");
+    useNavigate("/search");
   };
 
   return (
