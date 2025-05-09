@@ -1,17 +1,32 @@
 import { useEffect, useState } from "react";
+import "./Style.css";
 
-async function Result() {
-  const loadData = await fetch("http://127.0.0.1:4455/results");
-  const works = await loadData.json();
+function Result() {
+  const [data, setData] = useState([{}]);
+  useEffect(() => {
+    fetch("http://127.0.0.1:4455/results")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        console.log(data);
+      });
+  }, []);
+
   return (
-    <>
-      <h1>Works</h1>
-      <ol>
-        {works.items.map((work, index) => (
-          <li key={index}>{work}</li>
-        ))}
-      </ol>
-    </>
+    <div>
+      {typeof data.items === "undefined" ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <h1>Works</h1>
+          <ol>
+            {data.items.map((work, index) => (
+              <li key={index}>{work}</li>
+            ))}
+          </ol>
+        </>
+      )}
+    </div>
   );
 }
 
