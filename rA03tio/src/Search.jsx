@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Style.css";
+import DarkModeToggle from "./DarkModeToggle";
 
 function Search() {
   const goToResult = () => {
@@ -19,6 +20,7 @@ function Search() {
           <input type="submit" id="next" value="Search" onClick={goToResult} />
         </span>
       </form>
+      <DarkModeToggle />
     </div>
   );
 }

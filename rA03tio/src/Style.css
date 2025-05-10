@@ -131,14 +131,22 @@ button:hover {
 }
 
 .dark-mode {
-  background: black;
+  /* background: #2e0000; */
   color: white;
+  background: #170707;
+  background: radial-gradient(
+    circle,
+    rgba(23, 7, 7, 1) 41%,
+    rgba(80, 18, 18, 1) 86%,
+    rgba(137, 28, 28, 1) 100%
+  );
 }
 
 #toggleDarkMode {
-  /* makes it so dark mode toggle button is slightly longer width wise */
-  width: 300px;
+  /* styling dark mode button */
+  width: 200px;
+  font-size: 30px;
   position: absolute;
   top: 15px;
-  right: 0;
+  right: 15px;
 }
