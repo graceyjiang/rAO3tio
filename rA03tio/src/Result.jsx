@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AO3Works from "./AO3Work.jsx";
 import "./Style.css";
 
 function Result() {
@@ -19,9 +20,16 @@ function Result() {
       ) : (
         <>
           <h1>Works</h1>
-          <ol>
+          {/* <ol>
             {data.items.map((work, index) => (
               <li key={index}>{work}</li>
+            ))}
+          </ol> */}
+          <ol>
+            {data.items.map((work, index) => (
+              <li key={index}>
+                <AO3Works work={work} />
+              </li>
             ))}
           </ol>
         </>
