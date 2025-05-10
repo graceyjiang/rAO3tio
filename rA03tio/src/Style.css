@@ -1,4 +1,9 @@
 @font-face {
+  font-family: "Figtree Italic";
+  src: url("./assets/Figtree-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
   font-family: "Lucida Grande";
   src: url("./assets/Lucida-Grande-Regular-Font.ttf");
 }
@@ -7,23 +12,29 @@
   src: url("./assets/arialroundedmtbold.ttf");
 }
 
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("./assets/InstrumentSerif-Regular.ttf");
+}
+
 body {
   /* paper*/
   background-image: url("./assets/paper.jpg");
   background-position: center;
-  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
-  font-family: "Lucida Grande";
-  line-height: 14px;
+  font-family: "Figtree Italic";
+  font-weight: semibold;
+  line-height: 0px;
 }
 
 h2 {
-  font-family: "Instrument Serif", serif;
+  font-family: "Instrument Serif";
   font-weight: 400;
   font-style: normal;
-  line-height: 14px;
 }
 
 button {
@@ -50,7 +61,7 @@ button:hover {
 }
 
 #frontpage2 {
-  font-size: 42px;
+  font-size: 50px;
   line-height: 1.5;
 }
 
@@ -127,4 +138,7 @@ button:hover {
 #toggleDarkMode {
   /* makes it so dark mode toggle button is slightly longer width wise */
   width: 300px;
+  position: absolute;
+  top: 15px;
+  right: 0;
 }
