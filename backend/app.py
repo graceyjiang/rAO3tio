@@ -52,7 +52,6 @@ def ratio():
     #     item = {"title": work.metadata['title'], "author": work.metadata['authors'], "ratio": ratio, "bookmarks": metadata["bookmarks"], "kudos": metadata["kudos"], "hits": metadata["hits"]}
     #     items.append(item)
 
-    # return render_template('results.html', items=items)
     return {"items": items}
     
 
