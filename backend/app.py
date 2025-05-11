@@ -21,18 +21,23 @@ def ratio():
     #     metadata = result.metadata
     #     print(result,  metadata["kudos"])
 
-    ratio_heap = [] 
-    for work in search.results:
-        metadata = work.metadata
-        work_keys = metadata.keys() 
-        if "bookmarks" in work_keys and "kudos" in work_keys and "hits" in work_keys:
-            bookmarks_to_kudos = metadata["bookmarks"] / metadata["kudos"]
-            if bookmarks_to_kudos > 1:
-                bookmarks_to_kudos = 1
-            heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"], work))
+    ratio_heap = []
+    # while search.results is not None:
+    for _ in range(5):
+        for work in search.results:
+            metadata = work.metadata
+            work_keys = metadata.keys() 
+            if "bookmarks" in work_keys and "kudos" in work_keys and "hits" in work_keys:
+                bookmarks_to_kudos = metadata["bookmarks"] / metadata["kudos"]
+                if bookmarks_to_kudos > 1:
+                    bookmarks_to_kudos = 1
+                heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"], work))
+        search.page += 1
+        print(search.page)
+        search.update()
     
     items = []
-    for _ in range(min(50, len(ratio_heap))):
+    for _ in range(min(100, len(ratio_heap))):
         bookmarks_to_kudos, hits, work = heapq.heappop(ratio_heap)
         title = work.metadata['title']
         author = work.metadata['authors']
