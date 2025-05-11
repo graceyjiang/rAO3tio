@@ -14,7 +14,7 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 def ratio():
     # TODO: allow users to search by either title, tags, author, or any_field
     # return {"items": ["this", "sucks", "man"]}
-    search = AO3.Search(tags="Caitlyn*s*Vi%20(League%20of%20Legends)", kudos=AO3.utils.Constraint(10000))
+    search = AO3.Search(any_field="Clarke Lexa",  word_count=AO3.utils.Constraint(5000, 15000)) #kudos=AO3.utils.Constraint(10000)
     search.update()
 
     # for result in search.results:
