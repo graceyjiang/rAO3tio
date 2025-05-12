@@ -14,7 +14,7 @@ function AO3Work({ work }) {
           {title}
         </a>
       </h2>
-      <p className="card-text">{work.author}</p>
+      <p className="card-text">Author: {work.author}</p>
       <div className="stat-container">
         <div className="card-text">Ratio: {work.ratio}</div>
         <div className="card-text">Bookmarks: {work.bookmarks}</div>

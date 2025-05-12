@@ -137,7 +137,7 @@ button:hover {
 
 .dark-mode {
   /* background: #2e0000; */
-  color: white;
+  color: #cccccc;
   background: #170707;
   background: radial-gradient(
     circle,
@@ -159,12 +159,14 @@ button:hover {
 .work-title {
   color: #891c1c;
   font-family: "Lucida Grande";
+  margin: 10px;
+  text-underline-position: under;
 }
 
 .result-card {
   background-color: whitesmoke;
   border-radius: 15px;
-  padding: 2px 10px 20px 20px;
+  padding: 20px 10px 20px 20px;
   margin: 30px;
   width: 500px;
   height: 200px;
@@ -180,4 +182,13 @@ button:hover {
 
 .card-text {
   font-family: "Lucida Grande";
+  margin: 10px;
+}
+
+body.dark-mode .result-card {
+  background-color: rgb(21, 21, 21);
+}
+
+body.dark-mode .work-title {
+  color: #791d1d;
 }
