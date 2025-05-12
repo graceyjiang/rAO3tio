@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import AO3Work from "./AO3Work.jsx";
 import "./Style.css";
+import DarkModeToggle from "./DarkModeToggle";
+import { Link } from "react-router-dom";
 
 function Result() {
   const [data, setData] = useState([{}]);
@@ -14,17 +16,12 @@ function Result() {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {typeof data.items === "undefined" ? (
         <p>Loading...</p>
       ) : (
         <>
-          <h1>Works</h1>
-          {/* <ol>
-            {data.items.map((work, index) => (
-              <li key={index}>{work}</li>
-            ))}
-          </ol> */}
+          <h1 id="works-heading">Works</h1>
           <ol>
             {data.items.map((work, index) => (
               <li key={index}>
@@ -32,8 +29,12 @@ function Result() {
               </li>
             ))}
           </ol>
+          <Link to="/search">
+            <button className="back-to-search">Back to Search</button>
+          </Link>
         </>
       )}
+      <DarkModeToggle />
     </div>
   );
 }

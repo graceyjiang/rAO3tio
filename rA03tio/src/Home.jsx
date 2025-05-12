@@ -4,7 +4,6 @@
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
-import React from "react";
 
 function Home() {
   const navigate = useNavigate();

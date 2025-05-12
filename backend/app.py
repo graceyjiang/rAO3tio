@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import AO3
 import heapq
@@ -13,49 +13,37 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 @app.route('/results', methods=["GET", "POST"])
 def ratio():
     # TODO: allow users to search by either title, tags, author, or any_field
-    # return {"items": ["this", "sucks", "man"]}
-    search = AO3.Search(any_field="Clarke Lexa",  word_count=AO3.utils.Constraint(5000, 15000)) #kudos=AO3.utils.Constraint(10000)
+    search_input = request.args.get('fname')
+    search = AO3.Search(any_field=f"{search_input}",  kudos=AO3.utils.Constraint(2000)) #kudos=AO3.utils.Constraint(10000)
     search.update()
-
-    # for result in search.results:
-    #     metadata = result.metadata
-    #     print(result,  metadata["kudos"])
+    print(search.total_results)
 
     ratio_heap = []
     # while search.results is not None:
-    for _ in range(5):
-        for work in search.results:
-            metadata = work.metadata
-            work_keys = metadata.keys() 
-            if "bookmarks" in work_keys and "kudos" in work_keys and "hits" in work_keys:
-                bookmarks_to_kudos = metadata["bookmarks"] / metadata["kudos"]
-                if bookmarks_to_kudos > 1:
-                    bookmarks_to_kudos = 1
-                heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"], work))
-        search.page += 1
-        print(search.page)
-        search.update()
-    
+    # for i in range(1, search.pages + 1):
+    for work in search.results:
+        metadata = work.metadata
+        work_keys = metadata.keys() 
+        if "bookmarks" in work_keys and "kudos" in work_keys and "hits" in work_keys:
+            bookmarks_to_kudos = metadata["bookmarks"] / metadata["kudos"]
+            if bookmarks_to_kudos > 1:
+                bookmarks_to_kudos = 1
+            heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"], work))
+    # search.page = i+1
+    # search.update()
+
     items = []
     for _ in range(min(100, len(ratio_heap))):
         bookmarks_to_kudos, hits, work = heapq.heappop(ratio_heap)
+
         title = work.metadata['title']
         author = work.metadata['authors']
-        # bookmarks_to_kudos = "bookmarks to kudos ratio: " + str(bookmarks_to_kudos * -1)
-        bookmarks = work.metadata['bookmarks'] # "bookmarks: " + str(work.metadata['bookmarks'])
-        kudos = work.metadata['kudos'] # "kudos: " + str(work.metadata['kudos'])
-        # hits = "hits: " + str(hits)
+        bookmarks = work.metadata['bookmarks'] 
+        kudos = work.metadata['kudos'] 
+        work_id = work.metadata['id']
 
-        # items.append(title + " - " + author + ", " + bookmarks_to_kudos + bookmarks + kudos + hits)
-        item = {"title": title, "author": author, "ratio": bookmarks_to_kudos*-1, "bookmarks": bookmarks, "kudos": kudos, "hits": hits}
+        item = {"title": title, "author": author, "ratio": round(bookmarks_to_kudos*-1, 4), "bookmarks": bookmarks, "kudos": kudos, "hits": hits, "id": work_id}
         items.append(item)
-
-    # items = []
-    # for work in search.results:
-    #     metadata = work.metadata
-    #     ratio = metadata["bookmarks"] / metadata["kudos"]
-    #     item = {"title": work.metadata['title'], "author": work.metadata['authors'], "ratio": ratio, "bookmarks": metadata["bookmarks"], "kudos": metadata["kudos"], "hits": metadata["hits"]}
-    #     items.append(item)
 
     return {"items": items}
     

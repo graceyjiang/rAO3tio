@@ -8,7 +8,7 @@ function Search() {
   };
 
   return (
-    <div class="container2">
+    <div className="container2">
       <h2>
         <div id="whattag">What tag are you looking for?</div>
       </h2>

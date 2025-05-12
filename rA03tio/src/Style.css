@@ -55,6 +55,11 @@ button:hover {
   background: #891c1c;
 }
 
+.back-to-search {
+  font-size: 30px;
+  width: 250px;
+}
+
 #frontpage1 {
   font-size: 128px;
   letter-spacing: -0.17em;
@@ -149,4 +154,30 @@ button:hover {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+.work-title {
+  color: #891c1c;
+  font-family: "Lucida Grande";
+}
+
+.result-card {
+  background-color: whitesmoke;
+  border-radius: 15px;
+  padding: 2px 10px 20px 20px;
+  margin: 30px;
+  width: 500px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+#works-heading {
+  position: relative;
+  top: 30px;
+  font-size: 40px;
+  font-family: "Instrument Serif";
+}
+
+.card-text {
+  font-family: "Lucida Grande";
 }
