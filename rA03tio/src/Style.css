@@ -138,13 +138,14 @@ button:hover {
 .dark-mode {
   /* background: #2e0000; */
   color: #cccccc;
-  background: #170707;
+  background-image: url("./assets/blackpaper.jpg");
+  /* background: #170707;
   background: radial-gradient(
     circle,
     rgba(23, 7, 7, 1) 41%,
     rgba(80, 18, 18, 1) 86%,
     rgba(137, 28, 28, 1) 100%
-  );
+  ); */
 }
 
 #toggleDarkMode {
@@ -166,7 +167,7 @@ button:hover {
 .result-card {
   background-color: whitesmoke;
   border-radius: 15px;
-  padding: 20px 10px 20px 20px;
+  padding: 20px 10px 40px 20px;
   margin: 30px;
   width: 500px;
   height: 200px;
@@ -183,10 +184,12 @@ button:hover {
 .card-text {
   font-family: "Lucida Grande";
   margin: 10px;
+  font-size: 20px;
 }
 
 body.dark-mode .result-card {
   background-color: rgb(21, 21, 21);
+  border: 1px solid #cccccc;
 }
 
 body.dark-mode .work-title {
