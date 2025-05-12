@@ -18,7 +18,7 @@ function Result() {
   return (
     <div className="container">
       {typeof data.items === "undefined" ? (
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       ) : (
         <>
           <h1 id="works-heading">Works</h1>

@@ -192,3 +192,13 @@ body.dark-mode .result-card {
 body.dark-mode .work-title {
   color: #791d1d;
 }
+
+.loading {
+  font-family: "Arial Rounded MT Bold";
+  color: #891c1c;
+  font-size: 60px;
+}
+
+body.dark-mode .loading {
+  color: #cccccc;
+}
