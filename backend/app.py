@@ -13,11 +13,9 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 @app.route('/results', methods=["GET", "POST"])
 def ratio():
     # TODO: allow users to search by either title, tags, author, or any_field
-    search_input = request.args.get('fname')
-    print(search_input)
-    search = AO3.Search(any_field=f"{search_input}",  kudos=AO3.utils.Constraint(2000)) #kudos=AO3.utils.Constraint(10000)
+    search_input = request.args.get('query')
+    search = AO3.Search(any_field=str(search_input),  kudos=AO3.utils.Constraint(10)) #kudos=AO3.utils.Constraint(10000)
     search.update()
-    print(search.total_results)
 
     ratio_heap = []
     # while search.results is not None:
@@ -46,7 +44,6 @@ def ratio():
         item = {"title": title, "author": author, "ratio": round(bookmarks_to_kudos*-1, 4), "bookmarks": bookmarks, "kudos": kudos, "hits": hits, "id": work_id}
         items.append(item)
 
-    
     return {"items": items}
     
 

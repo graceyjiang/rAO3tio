@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import AO3Work from "./AO3Work.jsx";
 import "./Style.css";
 import DarkModeToggle from "./DarkModeToggle";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Result() {
   const [data, setData] = useState([{}]);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
   useEffect(() => {
-    fetch("http://127.0.0.1:4455/results")
+    fetch(`http://127.0.0.1:4455/results?query=${encodeURIComponent(query)}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -22,7 +25,7 @@ function Result() {
       ) : (
         <>
           <h1 id="works-heading">Works</h1>
-          <ol>
+          <ol style={{ listStyleType: "none", paddingLeft: 0 }}>
             {data.items.map((work, index) => (
               <li key={index}>
                 <AO3Work work={work} />

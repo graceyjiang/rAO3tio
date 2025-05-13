@@ -161,17 +161,28 @@ button:hover {
   color: #891c1c;
   font-family: "Lucida Grande";
   margin: 10px;
+  text-indent: 0;
   text-underline-position: under;
 }
 
 .result-card {
   background-color: whitesmoke;
   border-radius: 15px;
-  padding: 20px 10px 40px 20px;
+  padding: 20px 20px 20px 20px;
   margin: 30px;
-  width: 500px;
-  height: 200px;
+  width: 600px;
   border: 1px solid black;
+
+  height: auto; /* Fixed width; height adjusts with text*/
+  word-wrap: break-word;
+}
+
+.result-card:hover {
+  background-color: #bdbdbd;
+}
+
+body.dark-mode .result-card:hover {
+  background-color: #242424;
 }
 
 #works-heading {
