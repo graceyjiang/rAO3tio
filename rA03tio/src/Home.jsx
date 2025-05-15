@@ -4,6 +4,7 @@
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import { Link } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -25,6 +26,9 @@ function Home() {
         </h2>
         <button onClick={goToSearch}>Let's go!</button>
         <DarkModeToggle />
+        <Link to="/about" className="about">
+          About
+        </Link>
       </div>
     </>
   );

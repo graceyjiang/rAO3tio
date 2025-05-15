@@ -46,12 +46,22 @@ button {
   color: #891c1c;
   background: #ffffff;
   cursor: pointer;
-  border: 2px solid black;
+  border: 1px solid black;
   text-wrap: nowrap;
 }
 
 button:hover {
   color: white;
+  background: #891c1c;
+}
+
+body.dark-mode button {
+  /* button during dark mode */
+  background: #cccccc;
+}
+
+body.dark-mode button:hover {
+  /* button during dark mode hover */
   background: #891c1c;
 }
 
@@ -91,7 +101,7 @@ button:hover {
   align-items: center; /* Vertical center alignment */
   justify-content: center; /* Horizontal center alignment */
   min-height: 100vh;
-  padding: 10px 40px;
+  /* padding: 10px 40px; */
 }
 
 #tagbox input {
@@ -105,6 +115,11 @@ button:hover {
 
 #tagbox input:focus {
   border: 2px solid #891c1c;
+}
+
+body.dark-mode input[type="text"],
+textarea {
+  background-color: #cccccc;
 }
 
 #tag {
@@ -135,17 +150,19 @@ button:hover {
   background: #891c1c;
 }
 
+body.dark-mode #next {
+  /* button during dark mode */
+  background: #cccccc;
+}
+
+body.dark-mode #next:hover {
+  /* button during dark mode hover */
+  background: #891c1c;
+}
+
 .dark-mode {
-  /* background: #2e0000; */
   color: #cccccc;
   background-image: url("./assets/blackpaper.jpg");
-  /* background: #170707;
-  background: radial-gradient(
-    circle,
-    rgba(23, 7, 7, 1) 41%,
-    rgba(80, 18, 18, 1) 86%,
-    rgba(137, 28, 28, 1) 100%
-  ); */
 }
 
 #toggleDarkMode {
@@ -229,4 +246,19 @@ body.dark-mode .loading {
 .completion-option {
   font-size: 24px;
   font-family: "Instrument Serif";
+}
+
+.about {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-family: "Figtree Italic";
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 35px;
+  color: #242424;
+}
+
+body.dark-mode .about {
+  color: #cccccc;
 }
