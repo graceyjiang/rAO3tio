@@ -8,9 +8,14 @@ function Result() {
   const [data, setData] = useState([{}]);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
+  const completion = searchParams.get("completion");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:4455/results?query=${encodeURIComponent(query)}`)
+    fetch(
+      `http://127.0.0.1:4455/results?query=${encodeURIComponent(
+        query
+      )}&completion=${encodeURIComponent(completion)}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setData(data);

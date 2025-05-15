@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Style.css";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -8,11 +9,17 @@ function Search() {
   // };
   const navigate = useNavigate();
 
+  const [completed, setCompleted] = useState(null);
+
   const goToResult = (e) => {
-    e.preventDefault(); // Prevent default form submission (requires input?)
+    e.preventDefault(); // Prevent default form submission and reloading the page (essential in single-page apps)
     const query = document.getElementById("tag").value;
     if (query) {
-      navigate(`/results?query=${encodeURIComponent(query)}`);
+      navigate(
+        `/results?query=${encodeURIComponent(
+          query
+        )}&completion=${encodeURIComponent(completed)}`
+      );
     }
   };
 
@@ -24,11 +31,43 @@ function Search() {
       {/* <form action="/results"> */}
       <form onSubmit={goToResult}>
         <span id="tagbox">
-          <input type="text" name="fname" id="tag" required />
+          <input type="text" id="tag" required />
         </span>
         <span>
           <input type="submit" id="next" value="Search" />
         </span>
+        <div className="completion-status-container">
+          <label className="completion-option">
+            <input
+              type="radio"
+              name="completion-status"
+              id="all_works"
+              onChange={() => setCompleted("none")}
+              defaultChecked
+            />
+            All Works
+          </label>
+
+          <label className="completion-option">
+            <input
+              type="radio"
+              name="completion-status"
+              id="complete_only"
+              onChange={() => setCompleted("true")}
+            />
+            Complete Works Only
+          </label>
+
+          <label className="completion-option">
+            <input
+              type="radio"
+              name="completion-status"
+              id="wip_only"
+              onChange={() => setCompleted("false")}
+            />
+            Works In Progress Only
+          </label>
+        </div>
       </form>
       <DarkModeToggle />
     </div>

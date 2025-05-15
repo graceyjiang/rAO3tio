@@ -216,3 +216,17 @@ body.dark-mode .work-title {
 body.dark-mode .loading {
   color: #cccccc;
 }
+
+.completion-status-container {
+  display: flex;
+  flex-direction: column; /* stacks options vertically */
+  margin-top: 10px;
+}
+.completion-status-container input[type="radio"] {
+  margin: 10px; /* add spacing */
+}
+
+.completion-option {
+  font-size: 24px;
+  font-family: "Instrument Serif";
+}
