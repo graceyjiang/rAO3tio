@@ -29,10 +29,22 @@ function DarkModeToggle() {
   };
 
   return (
-    <button id="toggleDarkMode" onClick={toggleDarkMode}>
-      Dark Mode
-      {/* {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"} */}
-    </button>
+    // <button id="toggleDarkMode" onClick={toggleDarkMode}>
+    //   Dark Mode
+    //   {/* {darkMode ? "Disable Dark Mode" : "Enable Dark Mode"} */}
+    // </button>
+
+    <div id="toggleDarkMode">
+      <input
+        type="checkbox"
+        class="checkbox"
+        id="checkbox"
+        onChange={toggleDarkMode}
+      />
+      <label for="checkbox" class="checkbox-label">
+        <span class="ball"></span>
+      </label>
+    </div>
   );
 }
 

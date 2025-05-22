@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 import AO3
 import heapq
-
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -22,11 +22,32 @@ def ratio():
     elif completion == "false":
         completion_boolean = False
 
-        
-    search = AO3.Search(tags=str(search_input),  kudos=AO3.utils.Constraint(3400), completion_status=completion_boolean) #kudos=AO3.utils.Constraint(10000)
-    search.update()
+    #str(search_input)
+    # kudos=AO3.utils.Constraint(3700),
+    search = AO3.Search(tags=str(search_input), kudos=AO3.utils.Constraint(2000), completion_status=completion_boolean) #kudos=AO3.utils.Constraint(10000)
+    #search.update()
+    max_attempts = 3
+    for attempt in range(max_attempts):
+        try:
+            search.update()
+            if not search.results:
+                raise ValueError("No results or invalid page.")
+
+            break  # Success
+
+        except (AttributeError, ValueError) as e:
+            print(f"[Initial Attempt {attempt+1}]Search failed: {e}")
+            time.sleep(5)
+    else:
+        print("Search failed after multiple retries.")
+
+
+    #print(type(search.results))  # should be list
+    #print(search.results[:1])    # show sample result
+
 
     ratio_heap = []
+    #print(search.pages)
     # while search.results is not None:
     for i in range(1, search.pages + 1):
         for work in search.results:
@@ -37,11 +58,25 @@ def ratio():
                 if bookmarks_to_kudos > 1:
                     bookmarks_to_kudos = 1
                 heapq.heappush(ratio_heap, (-1 *bookmarks_to_kudos, metadata["hits"], work))
-        if i >= search.pages: break
+        #if i >= search.pages: break
         search.page = i+1
-        search.update()
+       
+        #search.update()
+        for attempt in range(max_attempts):
+            try:
+                search.update()
+                if not search.results:
+                    raise ValueError("No results or invalid page.")
+
+                break  # Success
+
+            except (AttributeError, ValueError) as e:
+                print(f"[Attempt {attempt+1}] [Page {i}] Search failed: {e}")
+                time.sleep(5)  # slow down between pages
+        else:
+            print("Search failed after multiple retries.")
     
-    print(search.total_results)
+    #print(search.total_results)
 
     items = []
     for _ in range(min(100, len(ratio_heap))):
