@@ -9,17 +9,42 @@ function Search() {
   // };
   const navigate = useNavigate();
 
-  const [completed, setCompleted] = useState(null);
+  const [formData, setFormData] = useState({
+    completionStatus: null,
+    textInput: "",
+  });
 
-  const goToResult = (e) => {
+  // const [completed, setCompleted] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target; // event object
+    setFormData((prev) => ({ ...prev, [name]: value })); // sets the formdata from above
+  };
+
+  const goToResult = async (e) => {
     e.preventDefault(); // Prevent default form submission and reloading the page (essential in single-page apps)
-    const query = document.getElementById("tag").value;
-    if (query) {
-      navigate(
-        `/results?query=${encodeURIComponent(
-          query
-        )}&completion=${encodeURIComponent(completed)}`
-      );
+    // const query = document.getElementById("tag").value;
+    // if (query) {
+    //   navigate(
+    //     `/results?query=${encodeURIComponent(
+    //       query
+    //     )}&completion=${encodeURIComponent(completed)}`
+    //   );
+    // }
+    try {
+      console.log(formData);
+      const response = await fetch("http://127.0.0.1:4455/results", {
+        // send body as a post request to flask backend
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const jsonReponse = await response.json();
+      console.log(jsonReponse);
+      localStorage.setItem("data", jsonReponse); // store response from backend in local storage so we can retrieve it for results page
+      navigate("/results");
+    } catch (error) {
+      console.error("Fetch failed: ", error);
     }
   };
 
@@ -28,10 +53,16 @@ function Search() {
       <h2>
         <div id="whattag">What tag are you looking for?</div>
       </h2>
-      {/* <form action="/results"> */}
       <form onSubmit={goToResult}>
         <span id="tagbox">
-          <input type="text" id="tag" required />
+          <input
+            type="text"
+            id="tag"
+            name="textInput"
+            value={formData.textInput}
+            onChange={handleChange}
+            required
+          />
         </span>
         <span>
           <input type="submit" id="next" value="Search" />
@@ -40,9 +71,10 @@ function Search() {
           <label className="completion-option">
             <input
               type="radio"
-              name="completion-status"
               id="all_works"
-              onChange={() => setCompleted("none")}
+              name="completionStatus"
+              value="none"
+              onChange={handleChange}
               defaultChecked
             />
             All Works
@@ -51,9 +83,10 @@ function Search() {
           <label className="completion-option">
             <input
               type="radio"
-              name="completion-status"
               id="complete_only"
-              onChange={() => setCompleted("true")}
+              name="completionStatus"
+              value="true"
+              onChange={handleChange}
             />
             Complete Works Only
           </label>
@@ -61,9 +94,10 @@ function Search() {
           <label className="completion-option">
             <input
               type="radio"
-              name="completion-status"
               id="wip_only"
-              onChange={() => setCompleted("false")}
+              name="completionStatus"
+              value="false"
+              onChange={handleChange}
             />
             Works In Progress Only
           </label>

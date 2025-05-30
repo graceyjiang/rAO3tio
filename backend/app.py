@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import AO3
 import heapq
@@ -13,9 +13,14 @@ app.secret_key = 'This is your secret key to utilize session in Flask'
 @app.route('/results', methods=["GET", "POST"])
 def ratio():
     # TODO: allow users to search by either title, tags, author, or any_field
-    search_input = request.args.get('query')
+    data = request.get_json() #converts json to python dictionary
+    print(data)
+    
+    search_input = data.get("textInput")
+   # search_input = request.args.get('query')
 
-    completion = request.args.get('completion')
+    #completion = request.args.get('completion')
+    completion = data.get("completionStatus")
     completion_boolean = None
     if completion == "true":
         completion_boolean = True
@@ -24,7 +29,7 @@ def ratio():
 
     #str(search_input)
     # kudos=AO3.utils.Constraint(3700),
-    search = AO3.Search(tags=str(search_input), kudos=AO3.utils.Constraint(2000), completion_status=completion_boolean) #kudos=AO3.utils.Constraint(10000)
+    search = AO3.Search(tags=str(search_input), kudos=AO3.utils.Constraint(4000), completion_status=completion_boolean) #kudos=AO3.utils.Constraint(10000)
     #search.update()
     max_attempts = 3
     for attempt in range(max_attempts):
@@ -91,7 +96,8 @@ def ratio():
         item = {"title": title, "author": author, "ratio": round(bookmarks_to_kudos*-1, 4), "bookmarks": bookmarks, "kudos": kudos, "hits": hits, "id": work_id}
         items.append(item)
 
-    return {"items": items}
+    response = {"items": items}
+    return jsonify(response), 200
     
 
 if __name__ == '__main__':
